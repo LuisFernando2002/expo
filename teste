@@ -1,0 +1,126 @@
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+
+export default function App() {
+  const [step, setStep] = useState(1);
+  const [code, setCode] = useState('');
+
+  const generateCode = () => {
+    const random = Math.floor(100 + Math.random() * 900);
+    const newCode = `金-X${random}-龍`;
+    setCode(newCode);
+    setStep(2);
+  };
+
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Image source={require('./assets/dragon-bg.png')} style={styles.backgroundImage} />
+      <View style={styles.card}>
+        {step === 1 && (
+          <>
+            <Text style={styles.header}>🎲 Código Secreto Oriental</Text>
+            <Text style={styles.subHeader}>Códigos usados por apostadores de Macau para ativar padrões raros nos slots. Descubra o seu.</Text>
+            <TouchableOpacity onPress={generateCode} style={styles.button}>
+              <Text style={styles.buttonText}>Liberar código da sorte</Text>
+            </TouchableOpacity>
+          </>
+        )}
+        {step === 2 && (
+          <>
+            <Text style={styles.header}>🔐 Código Gerado com Sucesso</Text>
+            <Text style={styles.code}>{code}</Text>
+            <Text style={styles.description}>Esse código foi usado por jogadores chineses para bugar o padrão de slots. Use com atenção.</Text>
+            <TouchableOpacity onPress={() => setStep(3)} style={styles.button}>
+              <Text style={styles.buttonText}>Ver sequência mística</Text>
+            </TouchableOpacity>
+          </>
+        )}
+        {step === 3 && (
+          <>
+            <Text style={styles.header}>📜 Sequência Sagrada</Text>
+            <Text style={styles.description}>1. Abra o jogo Sweet Bonanza ou Gates of Olympus</Text>
+            <Text style={styles.description}>2. Jogue 3 vezes com R$1</Text>
+            <Text style={styles.description}>3. Depois aposte R$10</Text>
+            <Text style={styles.description}>4. Finalize com R$0,20</Text>
+            <Text style={styles.description}>5. Durante a última rodada, visualize mentalmente o símbolo do dragão 🐉</Text>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>Assistir ritual completo</Text>
+            </TouchableOpacity>
+          </>
+        )}
+      </View>
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    backgroundColor: '#1d1d1d',
+  },
+  backgroundImage: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+    opacity: 0.5,
+  },
+  card: {
+    width: '100%',
+    maxWidth: 400,
+    padding: 20,
+    backgroundColor: '#1d1d1d',
+    borderRadius: 15,
+    borderColor: '#fcbf49',
+    borderWidth: 2,
+    shadowColor: '#fcbf49',
+    shadowRadius: 10,
+    shadowOpacity: 0.5,
+    alignItems: 'center',
+  },
+  header: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#fcbf49',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  subHeader: {
+    fontSize: 16,
+    color: '#fcbf49',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  button: {
+    backgroundColor: '#fcbf49',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 50,
+    marginTop: 20,
+  },
+  buttonText: {
+    color: '#1d1d1d',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  code: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#ff6347',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  description: {
+    fontSize: 14,
+    color: '#fcbf49',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+});
